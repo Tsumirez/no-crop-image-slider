@@ -1,0 +1,80 @@
+body {
+    --slide-delay: 0.5s
+}
+
+body > p {
+    cursor:pointer;
+}
+
+.slider {
+    width: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 135px;
+    overflow: hidden;
+    margin: 3rem auto;
+}
+
+.slider>div {
+    width: 0px;
+    display: inline-block;
+    transition: width .5s linear;
+    overflow: hidden;
+    direction: rtl;
+}
+
+.slider > input {
+    display: inline-block;
+}
+
+.slider> input[type="radio"]:checked ~ div {
+    width:200px;
+} 
+
+
+.previous + div {
+    border: 1px solid lime;
+}
+
+/* TRANSITION DELAYS STYLES (FOR 3 IMAGES WIDE SLIDER) */
+
+/* transition delays for next images */
+
+.previous + div {
+    transition-delay: 0s;
+}
+
+.previous + div + * + div {
+    transition-delay: .5s;
+}
+
+
+.previous + div + * + div + * + div {
+    transition-delay: 1s;
+}
+
+/* transition delays for previous images */
+ .slider> div:has( + .previous) {
+    transition-delay: 0s;
+}
+
+.slider> div:has( + * + div + .previous) {
+    transition-delay: .5s;
+}
+
+.slider> div:has( + * + div + * + div + .previous) {
+    transition-delay: 1s;
+}
+
+img {
+    width: 100%;
+    min-width:200px;
+}
+
+/* TODO 
+
+1. find a way to mark not the selected radio button, but the previous one that got blurred.
+2. By applying styles to that instead of selected radio, generic styles can be used.
+As is now the transition delays must perfectly match the amount of slides visible on slider and any deviation breaks the whole thing
+
+*/
